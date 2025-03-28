@@ -4,14 +4,14 @@ from django.contrib.auth.admin import UserAdmin
 
 @admin.register(Worker)
 class WorkerAdmin(UserAdmin):
-    list_display = ("username", "email", "is_staff", "is_superuser")
+    list_display = ("username", "email", "is_staff", "is_superuser","is_user")
     search_fields = ("username", "email")
     ordering = ("username",)
 
     fieldsets = (
         (None, {"fields": ("username", "password")}),
         ("Personal info", {"fields": ("first_name", "last_name", "email", "phone_number", "description")}),
-        ("Permissions", {"fields": ("is_active", "is_staff", "is_superuser", "groups", "user_permissions")}),
+        ("Permissions", {"fields": ("is_user","is_active", "is_staff", "is_superuser", "groups", "user_permissions")}),
     )
 
     def save_model(self, request, obj, form, change):

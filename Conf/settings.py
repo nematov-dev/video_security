@@ -10,7 +10,10 @@ SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = config('DEBUG')
 
-ALLOWED_HOSTS = ['206.81.22.226']
+ALLOWED_HOSTS = ['206.81.22.226','127.0.0.1']
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 
 # Application definition

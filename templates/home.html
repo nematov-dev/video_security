@@ -37,7 +37,15 @@
 </head>
 <body>
     <div class="container mt-4">
-        <h2 class="text-center mb-4" style="background-color: yellowgreen;">Videos</h2>
+        <h2 class="text-center mb-4" style="background-color: yellowgreen;">Videos</h2><hr>
+        {% if request.user.is_authenticated %}
+            <h2 >Your account<br><h4><br>username: {{ request.user }}</h4></h2><br><form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" style="background-color: rgb(236, 83, 83);">Logout</button>
+            </form><hr><br>
+        {% else %}
+            <h2><a href="{% url 'login' %}" style="color: red;">Login</a></h2><hr><br>
+        {% endif %}
         <div class="row">
             {% for video in videos %}
             <div class="col-md-4 mb-4">
@@ -49,7 +57,13 @@
                     </div>
                     <div class="card-body text-center">
                         <h5 class="card-title">{{ video.title }}</h5>
+                        {% if request.user.is_staff %}
+                            <button style="background-color: rgb(236, 83, 83);"><a href="{% url 'delete' video_id=video.id %}">delete</a></button>
+                        {% elif request.user.is_user %}
+                            <h4 style="color: rgb(236, 83, 83);">you can only view</h4>
+                        {% endif %}
                     </div>
+
                 </div>
             </div>
             {% endfor %}
