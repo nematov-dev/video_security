@@ -26,3 +26,9 @@ class MyLoginView(LoginView):
     redirect_authenticated_user = True
     next_page = '/' 
 
+def live_stream(request):
+    stream_url = "http://pendelcam.kip.uni-heidelberg.de/mjpg/video.mjpg"
+    stream_url2 = "http://67.53.46.161:65123/mjpg/video.mjpg"
+    stream_url3 = "http://77.222.181.11:8080/mjpg/video.mjpg"
+    return render(request, "stream.html", {"stream_url": stream_url,"stream_url2":stream_url2,"stream_url3":stream_url3})
+
